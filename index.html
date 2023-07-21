@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pizza Cart API</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="pizza.js" defer></script>
+  </head>
+
+  <body>
+    <div x-data="pizzaCartApi()">
+      <h1 x-text="title"></h1>
+      <div class="center-div">
+        <template x-for="pizza in cartPizzas">
+          <tr>
+            <td><span x-text="pizza.size"></span></td>
+            <td><span x-text="pizza.flavour"></span></td>
+            <td>R<span x-text="pizza.price"></span></td>
+            <td>X<span x-text="pizza.qty"></span></td>
+            <td><button class="add">+</button></td>
+            <td><button class="remove">-</button></td>
+          </tr>
+        </template>
+        <table>
+          <tr>
+            <td><p class="i">Total Cost:</p></td>
+            <td>R<span x-text="cartTotal.toFixed(2)"></span></td>
+          </tr>
+          <tr>
+            <td ><input x-model="paymentAmount" class="paymentAmount"></input></td>
+            <td ><button class="payment" x-on:click="checkout" >Check out</button></td>
+          </tr>
+        </table>
+      </div>
+      <template x-for="pizza in pizzas">
+        <div class="pizza_background pizza">
+        <table>
+            <tr>
+              <td><span x-text="pizza.size"></span></td>
+              <td><span x-text="pizza.flavour"></span></td>
+              <td>R<span x-text="pizza.price"></span></td>
+              <td><button class="payment">Buy</button></td>
+            </tr>
+          </table>
+        </div>
+        </template>
+    </div>
+    <div class="pizza contact_details">
+      <h2>Contact details</h2>
+      <div class="details">
+        <div class="clearfix">
+          021 542 1245 info@perfectpizza.com @perfectpizza
+        </div>
+      </div>
+    </div>
+    <script src="pizza.js"></script>
+  </body>
+</html>
