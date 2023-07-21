@@ -33,7 +33,7 @@ content-type: application/json
 
 {
 	"cart_code" : "SnL6UPNEEo",
-	"pizza_id" : 5
+	"pizza_id" : 3
 }
 
 ### GET all the carts for a given user

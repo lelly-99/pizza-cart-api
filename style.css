@@ -39,7 +39,7 @@ body {
         width: 25px; 
     } 
     
-    .payment, input {
+    .payment, input, .login {
         border-radius: 7px;
         border: none;
         height: 30px;
@@ -68,5 +68,11 @@ body {
         justify-content: space-between;
         align-items: center;
       }
+  .failure {
+    color: red;
+  }
+  .success {
+    color: green;
+  }
 
 

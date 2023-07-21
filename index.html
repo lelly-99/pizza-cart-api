@@ -10,52 +10,54 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="pizza.js" defer></script>
   </head>
-
   <body>
     <div x-data="pizzaCartApi()">
-      <h1 x-text="title"></h1>
+      <div class="contain">
+        <h1 x-text="title"></h1>
+          <i style="font-size:30px;" class="fa">&#xf07a;<span x-text="count" class="cartCount"></span></i>
+      </div>
       <div class="center-div">
+       <p>
+        Username : <input type="text" x-model="username">
+       </p>
+       <p x-show="cartId">Cart code : <span x-text="cartId"></span></p>
+       <button x-on:click="login" class="login">Login</button>
+      </div>
+      <div class="center-div">
+        <p><span x-text="errorMessage" class="failure"></span><span x-text="message" class="success"></span></p>
         <template x-for="pizza in cartPizzas">
           <tr>
-            <td><span x-text="pizza.size"></span></td>
             <td><span x-text="pizza.flavour"></span></td>
+            <td><span x-text="pizza.size"></span></td>
             <td>R<span x-text="pizza.price"></span></td>
             <td>X<span x-text="pizza.qty"></span></td>
-            <td><button class="add">+</button></td>
-            <td><button class="remove">-</button></td>
+            <td><button class="add" x-on:click="addPizzaToCart(pizza.id)">+</button></td>
+            <td><button class="remove" x-on:click="removePizzaFromCart(pizza.id)">-</button></td>
           </tr>
         </template>
-        <table>
+        <table x-show="cartTotal > 0">
           <tr>
             <td><p class="i">Total Cost:</p></td>
             <td>R<span x-text="cartTotal.toFixed(2)"></span></td>
           </tr>
           <tr>
-            <td ><input x-model="paymentAmount" class="paymentAmount"></input></td>
-            <td ><button class="payment" x-on:click="checkout" >Check out</button></td>
+            <td ><input class="paymentAmount" x-model="paymentAmount"></input></td>
+            <td ><button class="payment" x-on:click="payForCart()" >Check out</button></td>
           </tr>
         </table>
       </div>
       <template x-for="pizza in pizzas">
-        <div class="pizza_background pizza">
+        <div class="pizza_background pizza" x-show="username">
         <table>
             <tr>
               <td><span x-text="pizza.size"></span></td>
               <td><span x-text="pizza.flavour"></span></td>
               <td>R<span x-text="pizza.price"></span></td>
-              <td><button class="payment">Buy</button></td>
+              <td><button class="payment" x-on:click="addPizzaToCart(pizza.id)">Buy</button></td>
             </tr>
           </table>
         </div>
         </template>
-    </div>
-    <div class="pizza contact_details">
-      <h2>Contact details</h2>
-      <div class="details">
-        <div class="clearfix">
-          021 542 1245 info@perfectpizza.com @perfectpizza
-        </div>
-      </div>
     </div>
     <script src="pizza.js"></script>
   </body>
