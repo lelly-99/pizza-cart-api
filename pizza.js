@@ -17,7 +17,17 @@ document.addEventListener("alpine:init", () => {
         if (this.username.length > 3) {
           this.loggedIn = true;
           this.loggedOut = false;
-          this.createCart();
+          //local storage to store usernames and cart id
+          const cartInfo = JSON.parse(localStorage.getItem(this.username + "_cartId"));
+          //if another user is logged in, should display their exixting or new cart
+          if (cartInfo) {
+            this.cartId = cartInfo;
+            this.showCart();
+          } else {
+            this.createCart().then(() => {
+              this.showCart();
+            });
+          }
         } else {
           this.errorMessage = "Username must be at least 4 characters long.";
           setTimeout(() => {
@@ -31,18 +41,18 @@ document.addEventListener("alpine:init", () => {
           this.loggedOut = true;
           this.username = "";
           this.cartId = "";
-          localStorage.removeItem(this.username + '_cartId'); 
+          localStorage.removeItem(this.username + "_cartId");
         }
       },
       createCart() {
-        const cartInfo = JSON.parse(localStorage.getItem(this.username + '_cartId'));
+        const cartInfo = JSON.parse(localStorage.getItem(this.username + "_cartId"));
         if (cartInfo) {
           this.cartId = cartInfo;
         } else {
           const createCartUrl = `https://pizza-api.projectcodex.net/api/pizza-cart/create?username=${this.username}`;
           return axios.get(createCartUrl).then((result) => {
             this.cartId = result.data.cart_code;
-            localStorage.setItem(this.username + '_cartId', JSON.stringify(this.cartId));
+            localStorage.setItem(this.username + "_cartId",JSON.stringify(this.cartId) );
           });
         }
       },
@@ -82,13 +92,18 @@ document.addEventListener("alpine:init", () => {
           const cartData = result.data;
           this.cartPizzas = cartData.pizzas;
           this.cartTotal = cartData.total;
-          this.count = cartData.pizzas.reduce((total, pizza) => total + pizza.qty, 0);
+          this.count = cartData.pizzas.reduce(
+            (total, pizza) => total + pizza.qty,
+            0
+          );
         });
       },
       init() {
-        axios.get("https://pizza-api.projectcodex.net/api/pizzas").then((result) => {
-          this.pizzas = result.data.pizzas;
-        });
+        axios
+          .get("https://pizza-api.projectcodex.net/api/pizzas")
+          .then((result) => {
+            this.pizzas = result.data.pizzas;
+          });
         if (!this.cartId) {
           this.createCart().then(() => {
             this.showCart();

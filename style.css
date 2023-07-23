@@ -1,78 +1,98 @@
 body {
-    background-color: lightsteelblue;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
-    .clearfix {
-        overflow: auto;
-      }
-    .pizza {
-        border: 1px solid  lightsteelblue;
-        padding: 1em;
-        margin: 1em;
-        border-radius: 0.3em;
-        flex : 1;
-        background-color:rgb(146, 246, 246);
-    }
+  background-color: lightsteelblue;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
 
-    .contact_details {
-        background-color: rgb(17, 46, 46);
-    }
-    
-    @media (min-width: 960px) {
-        .pizzas {
-            display: flex;
-        }
-    
-    }
-    
-    button {
-        margin: 5px;
-        background-color:rgb(53, 123, 123);
-        float: left;
-    } 
-    
-    .add, .remove {
-        border-radius: 7px;
-        border: none;
-        height: 25px;
-        width: 25px; 
-    } 
-    
-    .payment, input, .login {
-        border-radius: 7px;
-        border: none;
-        height: 30px;
-        width: 73px; 
-    }
-    
-    .center-div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .cartCount {
-        position: relative;
-        top: -5px;
-        left: -10px;
-        background-color:rgb(56, 141, 141);
-        color: white;
-        padding: 2px 5px;
-        border-radius: 50%;
-        font-size: 12px;
-      }
-    
-    .contain {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-  .failure {
-    color: red;
+.clearfix {
+  overflow: auto;
+}
+.pizza {
+  border: 1px solid lightsteelblue;
+  padding: 1em;
+  margin: 1em;
+  border-radius: 0.3em;
+  flex: 1;
+  background-color: rgb(146, 246, 246);
+}
+
+.contact_details {
+  background-color: rgb(17, 46, 46);
+}
+
+@media (min-width: 960px) {
+  .pizzas {
+    display: flex;
   }
-  .success {
-    color: green;
-  }
+}
+
+button {
+  margin: 5px;
+  background-color: rgb(53, 123, 123);
+  float: left;
+}
+
+.add,
+.remove {
+  border-radius: 7px;
+  border: none;
+  height: 25px;
+  width: 25px;
+}
+
+.payment,
+input,
+.login {
+  border-radius: 7px;
+  border: none;
+  height: 30px;
+  width: 73px;
+}
+
+.center-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cartCount {
+  position: relative;
+  top: -5px;
+  left: -10px;
+  background-color: rgb(56, 141, 141);
+  color: white;
+  padding: 2px 5px;
+  border-radius: 50%;
+  font-size: 12px;
+}
+
+.contain {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.failure {
+  color: red;
+}
+.success {
+  color: green;
+}
+
+.featured {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.2px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.td {
+    padding: 8px;
+}
+
+
+
 
 
