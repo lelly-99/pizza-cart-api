@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pizza Cart API</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="//unpkg.com/alpinejs" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="pizza.js" defer></script>
-  </head>
-  <body>
-    <div x-data="pizzaCartApi()">
-      <div class="contain">
-        <h1 x-text="title"></h1>
-          <i style="font-size:30px;" class="fa">&#xf07a;<span x-text="count" class="cartCount"></span></i>
-      </div>
-      <div class="center-div">
-       <p>
-        Username : <input type="text" x-model="username">
-       </p>
-       <p x-show="cartId">Cart code : <span x-text="cartId"></span></p>
-       <button x-on:click="login" class="login">Login</button>
-      </div>
-      <div class="center-div">
-        <p><span x-text="errorMessage" class="failure"></span><span x-text="message" class="success"></span></p>
-        <template x-for="pizza in cartPizzas">
-          <tr>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pizza Cart API</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="//unpkg.com/alpinejs" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="pizza.js" defer></script>
+</head>
+
+<body>
+  <div x-data="pizzaCartApi()" x-init="init()">
+    <div class="contain">
+      <h1 x-text="title"></h1>
+      <i style="font-size: 30px" class="fa" x-show="loggedIn">&#xf07a;<span x-text="count" class="cartCount"></span></i>
+    </div>
+    <div class="center-div">
+      <p>Username : <input type="text" x-model="username" x-show="loggedOut"/><span x-text="username" x-show="loggedIn"></span></p>
+      <button x-on:click="loginUser" x-show="loggedOut" class="login">Login</button>
+      <button x-on:click="logOut" x-show="loggedIn" class="login">Logout</button>
+    </div>
+    <div class="center-div">
+      <p>
+        <span x-text="errorMessage" class="failure"></span><span x-text="message" class="success"></span>
+      </p>
+      <template x-for="pizza in cartPizzas" >
+          <tr x-show="loggedIn">
             <td><span x-text="pizza.flavour"></span></td>
             <td><span x-text="pizza.size"></span></td>
             <td>R<span x-text="pizza.price"></span></td>
@@ -35,30 +36,39 @@
             <td><button class="remove" x-on:click="removePizzaFromCart(pizza.id)">-</button></td>
           </tr>
         </template>
-        <table x-show="cartTotal > 0">
-          <tr>
-            <td><p class="i">Total Cost:</p></td>
-            <td>R<span x-text="cartTotal.toFixed(2)"></span></td>
-          </tr>
-          <tr>
-            <td ><input class="paymentAmount" x-model="paymentAmount"></input></td>
-            <td ><button class="payment" x-on:click="payForCart()" >Check out</button></td>
-          </tr>
-        </table>
-      </div>
-      <template x-for="pizza in pizzas">
-        <div class="pizza_background pizza" x-show="username">
-        <table>
+        <div x-show="loggedIn">
+          <table x-show="cartTotal > 0">
             <tr>
-              <td><span x-text="pizza.size"></span></td>
-              <td><span x-text="pizza.flavour"></span></td>
-              <td>R<span x-text="pizza.price"></span></td>
-              <td><button class="payment" x-on:click="addPizzaToCart(pizza.id)">Buy</button></td>
+              <td>
+                <p class="i">Total Cost:</p>
+              </td>
+              <td>R<span x-text="cartTotal.toFixed(2)"></span></td>
+            </tr>
+            <tr>
+              <td><input class="paymentAmount" x-model="paymentAmount" /></td>
+              <td>
+                <button class="payment" x-on:click="payForCart()">
+                  Check out
+                </button>
+              </td>
             </tr>
           </table>
         </div>
-        </template>
     </div>
-    <script src="pizza.js"></script>
-  </body>
+    <template x-for="pizza in pizzas">
+      <div class="pizza_background pizza" x-show="loggedIn">
+        <table>
+          <tr>
+            <td><span x-text="pizza.size"></span></td>
+            <td><span x-text="pizza.flavour"></span></td>
+            <td>R<span x-text="pizza.price"></span></td>
+            <td><button class="payment" x-on:click="addPizzaToCart(pizza.id)">Buy</button></td>
+          </tr>
+        </table>
+      </div>
+    </template>
+  </div>
+  <script src="pizza.js"></script>
+</body>
+
 </html>
