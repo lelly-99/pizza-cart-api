@@ -6,6 +6,10 @@ body {
 .clearfix {
   overflow: auto;
 }
+img {
+  height: 100px;
+  width: 100px;
+}
 .pizza {
   border: 1px solid lightsteelblue;
   padding: 1em;
@@ -20,7 +24,7 @@ body {
 }
 
 @media (min-width: 960px) {
-  .pizzas {
+  .pizza {
     display: flex;
   }
 }
@@ -33,6 +37,7 @@ button {
 
 .add,
 .remove {
+  gap: 5px;
   border-radius: 7px;
   border: none;
   height: 25px;
@@ -77,20 +82,67 @@ input,
   color: green;
 }
 
-.featured {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.2px;
-}
-
 .table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .td {
-    padding: 8px;
+  padding: 8px;
 }
+
+@media (max-width: 768px) {
+  .table {
+    display: block;
+  }
+
+  .td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .td img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .payment {
+    display: block;
+    margin-top: 10px;
+  }
+}
+
+th, td {
+    padding: 8px; 
+  }
+
+.featured {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 10px;
+    padding:10px;
+    
+}
+.pizzas {
+    width: 31%; 
+    margin-bottom: 20px; 
+    background-color: rgb(146, 246, 246);
+    border: 1px solid lightsteelblue;
+}
+
+@media screen and (max-width: 767px) {
+    .featured {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    .pizzas {
+        width: 100%; 
+    }
+}
+
 
 
 

@@ -52,7 +52,7 @@ document.addEventListener("alpine:init", () => {
           const createCartUrl = `https://pizza-api.projectcodex.net/api/pizza-cart/create?username=${this.username}`;
           return axios.get(createCartUrl).then((result) => {
             this.cartId = result.data.cart_code;
-            localStorage.setItem(this.username + "_cartId",JSON.stringify(this.cartId) );
+            localStorage.setItem(this.username + "_cartId", JSON.stringify(this.cartId));
           });
         }
       },

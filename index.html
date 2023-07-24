@@ -48,23 +48,30 @@
           <span x-text="errorMessage" class="failure"></span
           ><span x-text="message" class="success"></span>
         </p>
-        <template x-for="pizza in cartPizzas">
-          <tr x-show="loggedIn">
-            <td><span x-text="pizza.flavour"></span></td>
-            <td>R<span x-text="pizza.price"></span></td>
-            <td>X<span x-text="pizza.qty"></span></td>
-            <td>
-              <button class="add" x-on:click="addPizzaToCart(pizza.id)">
-                +
-              </button>
-            </td>
-            <td>
-              <button class="remove" x-on:click="removePizzaFromCart(pizza.id)">
-                -
-              </button>
-            </td>
-          </tr>
-        </template>
+        <table x-show="cartTotal > 0">
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>Flavour</th>
+              <th>Price</th>
+              <th>Qty</th>
+              <th>Add</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <template x-for="pizza in cartPizzas">
+            <tbody>
+              <tr x-show="loggedIn">
+                <td><span x-text="pizza.size"></span></td>
+                <td><span x-text="pizza.flavour"></span></td>
+                <td>R<span x-text="pizza.price"></span></td>
+                <td><span x-text="pizza.qty"></span></td>
+                <td><button class="add" x-on:click="addPizzaToCart(pizza.id)">+</button></td>
+                <td><button class="remove" x-on:click="removePizzaFromCart(pizza.id)">-</button></td>
+              </tr>
+            </tbody>
+          </template>
+          </table>
         <div x-show="loggedIn">
           <table x-show="cartTotal > 0">
             <tr>
@@ -86,24 +93,15 @@
       </div>
       <div class="featured" x-show="loggedIn">
         <template
-          x-for="(pizza, index) in pizzas"
-          x-if="pizza.featured > 1 && index <= 3"
-          x-bind:key="pizza.id"
-        >
-          <div class="pizza_background pizza">
-            <table class="table">
-              <tr>
-                <td class="td"><span x-text="pizza.flavour"></span></td>
-                <td class="td">Featured:<span x-text="pizza.featured"></span></td>
-                <td class="td">R<span x-text="pizza.price"></span></td>
-                <td class="td">
-                  <button class="payment" x-on:click="addPizzaToCart(pizza.id)">
-                    Buy
-                  </button>
-                </td>
-              </tr>
-            </table>
-          </div>
+          x-for="pizza in pizzas"
+          x-bind:key="pizza.id">
+          <div class="pizzas clearfix">
+                <h4><span x-text="pizza.size"></span> <span x-text="pizza.flavour"></span></h4>
+                <img src="pizza.png">
+                <p>Featured:<span x-text="pizza.featured"></span></p>
+                  <p>R<span x-text="pizza.price"></span></p>
+                <button class="payment" x-on:click="addPizzaToCart(pizza.id)">Buy</button>
+            </div>
         </template>
       </div>
       <template x-for="pizza in pizzas">
@@ -111,6 +109,7 @@
           <table>
             <tr>
               <td><span x-text="pizza.size"></span></td>
+              <td><img src="pizza.png"></td>
               <td><span x-text="pizza.flavour"></span></td>
               <td>R<span x-text="pizza.price"></span></td>
               <td class="buy-button">
