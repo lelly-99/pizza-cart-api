@@ -96,11 +96,25 @@
           x-for="pizza in pizzas"
           x-bind:key="pizza.id">
           <div class="pizzas clearfix">
-                <h4><span x-text="pizza.size"></span> <span x-text="pizza.flavour"></span></h4>
-                <img src="pizza.png">
-                <p>Featured:<span x-text="pizza.featured"></span></p>
-                  <p>R<span x-text="pizza.price"></span></p>
-                <button class="payment" x-on:click="addPizzaToCart(pizza.id)">Buy</button>
+            <h4 style="text-align: center;"><span x-text="pizza.size"></span> <span x-text="pizza.flavour"></span></h4>
+            <div class="image-container">
+              <img src="pizza.png" alt="Pizza">
+            </div>
+            <div class="center-table">
+              <table>
+                  <tr>
+                    <td><p>Featured: <span x-text="pizza.featured"></span></p></td>
+                    <td>
+                      <p>R<span x-text="pizza.price"></span></p>
+                    </td>
+                    <td>
+                      <button class="payment" x-on:click="addPizzaToCart(pizza.id)">Buy</button>
+                    </td>
+                  </tr>
+              </table>
+            </div>
+              
+            </div>
             </div>
         </template>
       </div>
